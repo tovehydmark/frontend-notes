@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Documents } from "../models/Document";
 
 export function ShowDocuments() {
@@ -39,6 +40,7 @@ export function ShowDocuments() {
 
   return (
     <>
+      <Link to={`/editor`}>Skapa nytt dokument</Link>
       <p>{printDocuments}</p>
     </>
   );

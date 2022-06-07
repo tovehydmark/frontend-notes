@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { Link } from "react-router-dom";
 
 export function WysiwygEditor() {
   const [documentTitle, setDocumentTitle] = useState("");
@@ -75,7 +76,8 @@ export function WysiwygEditor() {
       </form>
 
       <button>Visa färdigt dokument</button>
-      <button>Tillbaka till startsidan</button>
+
+      <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
     </>
   );
 }
