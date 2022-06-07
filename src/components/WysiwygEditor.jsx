@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 export function WysiwygEditor() {
-const [documentTitle, setDocumentTitle] = useState("")
-const [author, setAuthor] = useState("")
+  const [documentTitle, setDocumentTitle] = useState("");
+  const [author, setAuthor] = useState("");
 
   const editorRef = useRef(null);
 
@@ -11,29 +11,48 @@ const [author, setAuthor] = useState("")
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
 
+      let documentObject = {
+        documentTitle: documentTitle,
+        author: author,
+        documentText: editorRef.current.getContent(),
+      };
+
+      console.log(documentObject);
       //Här gör vi en post till api:et
+      addDocument(documentObject);
     }
   };
+
+  async function addDocument(documentObject) {
+    await fetch("http://localhost:3003/createDocument", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(documentObject),
+    })
+     
+      .then((data) => console.log(data));
+  }
 
   function handleTitleChange(e) {
     setDocumentTitle(e.target.value);
   }
-  function handleAuthorChange(e){
-    setAuthor(e.target.value)
+  function handleAuthorChange(e) {
+    setAuthor(e.target.value);
   }
 
   return (
     <>
-    <h1>Titel: {documentTitle}</h1>
-    <input type="text" value={documentTitle} onChange={handleTitleChange}/>   
-    
-    <p>Författare: {author}</p>
-    <input type="text" value={author} onChange={handleAuthorChange}/> 
+      <h1>Titel: {documentTitle}</h1>
+      <input type="text" value={documentTitle} onChange={handleTitleChange} />
+
+      <p>Författare: {author}</p>
+      <input type="text" value={author} onChange={handleAuthorChange} />
 
       <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>Skriv här...</p>"
-        
         init={{
           height: 500,
           menubar: false,
