@@ -42,6 +42,13 @@ export function WysiwygEditor() {
     setAuthor(e.target.value);
   }
 
+//Redigera dokument: skicka via props
+//props sträng som sätter initial value till <p>Skriv här...</p>, alternativt det som hämtas från databasen
+
+
+
+
+
   return (
     <>
       <h1>Titel: {documentTitle}</h1>
