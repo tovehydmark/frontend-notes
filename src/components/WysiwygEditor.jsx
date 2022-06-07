@@ -17,12 +17,11 @@ export function WysiwygEditor() {
         documentText: editorRef.current.getContent(),
       };
 
-      console.log(documentObject);
-      //Här gör vi en post till api:et
       addDocument(documentObject);
     }
   };
 
+  //Post new document to API
   async function addDocument(documentObject) {
     await fetch("http://localhost:3003/createDocument", {
       method: "post",
@@ -30,9 +29,7 @@ export function WysiwygEditor() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(documentObject),
-    })
-     
-      .then((data) => console.log(data));
+    }).then((data) => console.log(data));
   }
 
   function handleTitleChange(e) {
@@ -42,42 +39,41 @@ export function WysiwygEditor() {
     setAuthor(e.target.value);
   }
 
-//Redigera dokument: skicka via props
-//props sträng som sätter initial value till <p>Skriv här...</p>, alternativt det som hämtas från databasen
-
-
-
-
+  //Redigera dokument: skicka via props
+  //props sträng som sätter initial value till <p>Skriv här...</p>, alternativt det som hämtas från databasen
 
   return (
     <>
-      <h1>Titel: {documentTitle}</h1>
-      <input type="text" value={documentTitle} onChange={handleTitleChange} />
+      <form method="post" onSubmit={addDocument}>
+        <h1>Titel: {documentTitle}</h1>
+        <input type="text" value={documentTitle} onChange={handleTitleChange} />
 
-      <p>Författare: {author}</p>
-      <input type="text" value={author} onChange={handleAuthorChange} />
+        <p>Författare: {author}</p>
+        <input type="text" value={author} onChange={handleAuthorChange} />
 
-      <Editor
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>Skriv här...</p>"
-        init={{
-          height: 500,
-          menubar: false,
-          plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount",
-          ],
-          toolbar:
-            "undo redo | formatselect | " +
-            "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
-          content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-        }}
-      />
-      <button onClick={log}>Spara</button>
+        <Editor
+          onInit={(evt, editor) => (editorRef.current = editor)}
+          initialValue="<p>Skriv här...</p>"
+          init={{
+            height: 500,
+            menubar: false,
+            plugins: [
+              "advlist autolink lists link image charmap print preview anchor",
+              "searchreplace visualblocks code fullscreen",
+              "insertdatetime media table paste code help wordcount",
+            ],
+            toolbar:
+              "undo redo | formatselect | " +
+              "bold italic backcolor | alignleft aligncenter " +
+              "alignright alignjustify | bullist numlist outdent indent | " +
+              "removeformat | help",
+            content_style:
+              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          }}
+        />
+        <button onClick={log}>Spara</button>
+      </form>
+
       <button>Visa färdigt dokument</button>
       <button>Tillbaka till startsidan</button>
     </>

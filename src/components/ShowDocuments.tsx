@@ -13,21 +13,25 @@ export function ShowDocuments() {
       .then((res) => res.json())
       .then((data) => {
         setAllDocuments(data);
-        console.log(data);
       });
   }
 
-  let printDocuments = allDocuments.map((document, i) => {
-    console.log(document.documentText);
+  //CreateMarkup as I'm setting inner HTML with "dangerouslySetInnerHTML" (recommendation by React documentation to use markup)
+  function createMarkup(i: number) {
+    return { __html: allDocuments[i].documentText };
+  }
 
-    // let text = JSON.parse(document.documentText);
+  //Prints all documents
+  let printDocuments = allDocuments.map((document, i) => {
+    createMarkup(i);
+
     return (
       <>
         <div key={i}>
           <h1>{document.documentTitle}</h1>
           <p> Författare: {document.author}</p>
-          {/* {document.documentText}
-          <p>{document.date}</p> */}
+          <p dangerouslySetInnerHTML={createMarkup(i)}></p>
+          <p>{document.date}</p>
         </div>
       </>
     );
