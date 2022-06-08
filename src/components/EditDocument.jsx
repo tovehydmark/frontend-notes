@@ -4,6 +4,7 @@ import { Documents } from "../models/Document";
 
 export function EditDocument(props) {
   const [startValue, setStartValue] = useState("");
+  // const [updatedText, setUpdatedText] = useState("");
 
   // Sets the start value in the editor to the document text derived from props
   useEffect(() => {
@@ -15,8 +16,28 @@ export function EditDocument(props) {
   const log = () => {
     if (editorRef.current) {
       //Här göra put för att uppdatera dokumentet
+
+      let updatedText = {
+        documentText: editorRef.current.getContent(),
+        id: props.documentinfo.documentId,
+      };
+      console.log(updatedText);
+      updateDocument(updatedText);
     }
   };
+
+  async function updateDocument(updatedText) {
+    await fetch("http://localhost:3003/fetchDocuments", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedText),
+    }).then((data) => {
+      console.log(data);
+    });
+  }
+
   return (
     <>
       <Editor
