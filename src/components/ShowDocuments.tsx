@@ -33,10 +33,13 @@ export function ShowDocuments() {
           <h1>{document.documentTitle}</h1>
           <p> Författare: {document.author}</p>
           <p>{document.date}</p>
-          <EditDocument documentinfo={document}></EditDocument>;
+          {/* <EditDocument documentinfo={document}></EditDocument>; */}
           {/* Lägg editDocument komponent här och skicka med dokumentet som props. I den komponenten gör vi sedan en put. Visa Editor komponenten där och skicka via props för att få ut rätt innehåll? */}
-          <Link to={""}></Link>
-          <button>Redigera dokument</button>
+
+          <Link to={`/editdocument/${document.documentId}`}>
+            Redigera dokument
+          </Link>
+
           <div dangerouslySetInnerHTML={createMarkup(i)}></div>
           <hr />
         </article>

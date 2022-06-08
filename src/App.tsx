@@ -3,6 +3,7 @@ import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 // import logo from './logo.svg';
 import "./App.css";
+import { EditDocument } from "./components/EditDocument";
 import { Layout } from "./components/Layout";
 import { Login } from "./components/Login";
 import { NotFound } from "./components/NotFound";
@@ -18,6 +19,7 @@ function App() {
             <Route index element={<Login />} />
             <Route path="/showdocuments" element={<ShowDocuments />} />
             <Route path="/editor" element={<WysiwygEditor />} />
+            <Route path="/editdocument/:id" element={<EditDocument />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

@@ -1,31 +1,77 @@
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Documents } from "../models/Document";
+import { DisplayDocument } from "./DisplayDocument";
+import { NotFound } from "./NotFound";
+import { ShowDocuments } from "./ShowDocuments";
 
-export function EditDocument(props) {
+export function EditDocument() {
   const [startValue, setStartValue] = useState("");
-  // const [updatedText, setUpdatedText] = useState("");
+  const [allDocuments, setAllDocuments] = useState([]);
+  const [thisDocumentId, setThisDocumentId] = useState(0);
+  const editorRef = useRef(null);
+  const [displayEditor, setDisplayEditor] = useState(false);
+  const [documentToDisplay, setDocumentToDisplay] = useState(
+    new Documents({
+      documentTitle: "",
+      documentText: "",
+      author: "",
+      date: "",
+      documentId: 0,
+    })
+  );
 
-  // Sets the start value in the editor to the document text derived from props
+  let params = useParams();
+
   useEffect(() => {
-    setStartValue(props.documentinfo.documentText);
+    // Saves params id to a variable
+    setThisDocumentId(params.id);
+    showDocuments();
   }, []);
 
-  const editorRef = useRef(null);
+  // Gets document content after fetch is done to ensure allDocuments have the updated content after fetch
+  useEffect(() => {
+    getDocumentContent();
+  }, [allDocuments]);
 
+  // Gets all documents from the database
+  async function showDocuments() {
+    await fetch("http://localhost:3003/fetchDocuments")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllDocuments(data);
+      });
+  }
+
+  // Finds the document of interest by comparing the params id and the document id
+  function getDocumentContent() {
+    allDocuments.find((doc) => {
+      if (doc.documentId == thisDocumentId) {
+        setStartValue(doc.documentText);
+
+        setDocumentToDisplay({
+          documentTitle: doc.documentTitle,
+          documentText: doc.documentText,
+          author: doc.author,
+          date: doc.date,
+          documentId: doc.documentId,
+        });
+      }
+    });
+  }
+
+  // Gets value from the text field and sends it with PUT to the database
   const log = () => {
     if (editorRef.current) {
-      //Här göra put för att uppdatera dokumentet
-
       let updatedText = {
         documentText: editorRef.current.getContent(),
-        id: props.documentinfo.documentId,
       };
-      console.log(updatedText);
       updateDocument(updatedText);
     }
   };
 
+  // Updates the document in the database
   async function updateDocument(updatedText) {
     await fetch("http://localhost:3003/fetchDocuments", {
       method: "put",
@@ -38,9 +84,41 @@ export function EditDocument(props) {
     });
   }
 
+  function handleClick() {
+    setDisplayEditor(!displayEditor);
+  }
+  //Kan jag lägga en boolean och visa redigering/fintext beroende på om den är true eller false?
+
+  // let showDocument = documentToDisplay.map((doc) => {
+  //   return (
+  //     <>
+  //       <h1>{doc.documentTitle}</h1>
+  //       <p>{doc.author}</p>
+  //       <p>{doc.date}</p>
+  //       <p>{doc.documentText}</p>
+  //     </>
+  //   );
+  // });
+
   return (
     <>
-      <Editor
+      {displayEditor ? (
+        <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
+      ) : (
+        <NotFound></NotFound>
+      )}
+      <button onClick={handleClick}>
+        {displayEditor ? "Redigera dokument" : "Visa i läsläge"}
+      </button>
+
+      {/* <article>
+        <h1>{documentToDisplay.documentTitle}</h1>
+        <p>{documentToDisplay.author}</p>
+        <p>{documentToDisplay.date}</p>
+        <p>{documentToDisplay.documentText}</p>
+      </article> */}
+
+      {/* <Editor
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue={startValue}
         init={{
@@ -60,7 +138,9 @@ export function EditDocument(props) {
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <button onClick={log}>Spara</button>
+      <button onClick={log}>Spara</button> */}
+
+      {/* <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link> */}
     </>
   );
 }
