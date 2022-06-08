@@ -2,7 +2,9 @@ import React, { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Link } from "react-router-dom";
 
-export function WysiwygEditor() {
+//Props för att kunna fånga document objektet
+
+export function WysiwygEditor(props) {
   const [documentTitle, setDocumentTitle] = useState("");
   const [author, setAuthor] = useState("");
 

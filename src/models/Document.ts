@@ -3,6 +3,7 @@ export class Documents {
     public documentTitle: string,
     public documentText: string,
     public author: string,
-    public date: string
+    public date: string,
+    public documentId: number
   ) {}
 }

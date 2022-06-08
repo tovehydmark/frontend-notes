@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Documents } from "../models/Document";
+import { EditDocument } from "./EditDocument";
 
 export function ShowDocuments() {
   const [allDocuments, setAllDocuments] = useState<Documents[]>([]);
@@ -26,14 +27,15 @@ export function ShowDocuments() {
   let printDocuments = allDocuments.map((document, i) => {
     createMarkup(i);
 
-    // console.log(document);
-    //Varför  hittar den inte documentId ?? finns ju i loggen
     return (
       <>
-        <article key={i}>
+        <article key={document.documentId}>
           <h1>{document.documentTitle}</h1>
           <p> Författare: {document.author}</p>
           <p>{document.date}</p>
+          <EditDocument documentinfo={document}></EditDocument>;
+          {/* Lägg editDocument komponent här och skicka med dokumentet som props. I den komponenten gör vi sedan en put. Visa Editor komponenten där och skicka via props för att få ut rätt innehåll? */}
+          <Link to={""}></Link>
           <button>Redigera dokument</button>
           <div dangerouslySetInnerHTML={createMarkup(i)}></div>
           <hr />
