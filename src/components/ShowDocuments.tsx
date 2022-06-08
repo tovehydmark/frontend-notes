@@ -26,14 +26,18 @@ export function ShowDocuments() {
   let printDocuments = allDocuments.map((document, i) => {
     createMarkup(i);
 
+    // console.log(document);
+    //Varför  hittar den inte documentId ?? finns ju i loggen
     return (
       <>
-        <div key={i}>
+        <article key={i}>
           <h1>{document.documentTitle}</h1>
           <p> Författare: {document.author}</p>
-          <p dangerouslySetInnerHTML={createMarkup(i)}></p>
           <p>{document.date}</p>
-        </div>
+          <button>Redigera dokument</button>
+          <div dangerouslySetInnerHTML={createMarkup(i)}></div>
+          <hr />
+        </article>
       </>
     );
   });
@@ -41,7 +45,7 @@ export function ShowDocuments() {
   return (
     <>
       <Link to={`/editor`}>Skapa nytt dokument</Link>
-      <p>{printDocuments}</p>
+      {printDocuments}
     </>
   );
 }

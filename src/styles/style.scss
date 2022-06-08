@@ -1,0 +1,25 @@
+.header {
+    background-color: rgb(146, 185, 161);
+    height: 80px;
+
+    h2 {
+        margin: 0;
+        padding: 20px 0 0 10px;
+        color: rgb(15, 67, 26);
+
+    }
+}
+
+.main {
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+.footer {
+
+    height: 50px;
+    width: 100%;
+    background-color: lightgray;
+    position: fixed;
+    bottom: 0;
+}
