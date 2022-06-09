@@ -52,22 +52,20 @@ export function EditDocument() {
     });
   }
 
-  // Toggles displayEditor to show the editor when user clicks edit, or shows in reading mode if not
   function handleClick() {
-    setDisplayEditor(!displayEditor);
+    setDisplayEditor(false);
   }
 
   return (
     <>
       {displayEditor ? (
-        <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
+        <div>
+          <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>{" "}
+          <button onClick={handleClick}>Redigera dokument</button>
+        </div>
       ) : (
         <Wysiwyg documentInfo={documentToDisplay}></Wysiwyg>
       )}
-
-      <button onClick={handleClick}>
-        {displayEditor ? "Redigera dokument" : "Visa i läsläge"}
-      </button>
     </>
   );
 }

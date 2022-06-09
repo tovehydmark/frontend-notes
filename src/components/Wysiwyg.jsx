@@ -20,6 +20,7 @@ export function Wysiwyg(props) {
         documentId: props.documentInfo.documentId,
       };
       updateDocumentWithPut(updatedText);
+      alert("Ändringar sparade");
     }
   };
 
