@@ -2,15 +2,17 @@ import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
+import { useNavigate } from "react-router-dom";
 
 export function WysiwygEditor() {
   const [documentTitle, setDocumentTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [displayReadingView, setDisplayReadingView] = useState(false);
-
   const [documentToDisplay, setDocumentToDisplay] = useState(
     new Documents("", "", "", "", 0)
   );
+
+  let navigate = useNavigate();
 
   const editorRef = useRef(null);
 
@@ -23,6 +25,8 @@ export function WysiwygEditor() {
       };
 
       addDocument(documentObject);
+      alert("Nytt dokument skapat!");
+      routeChange();
     }
   };
 
@@ -61,6 +65,11 @@ export function WysiwygEditor() {
     setDisplayReadingView(true);
   }
 
+  function routeChange() {
+    let path = `/showdocuments`;
+    navigate(path);
+  }
+
   return (
     <>
       <h1>Titel: {documentTitle}</h1>
@@ -84,7 +93,7 @@ export function WysiwygEditor() {
             "undo redo | formatselect | " +
             "bold italic backcolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
+            "removeformat",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
