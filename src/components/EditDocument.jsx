@@ -5,21 +5,16 @@ import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
 import { NotFound } from "./NotFound";
 import { ShowDocuments } from "./ShowDocuments";
+import { Wysiwyg } from "./Wysiwyg";
 
 export function EditDocument() {
   const [startValue, setStartValue] = useState("");
   const [allDocuments, setAllDocuments] = useState([]);
   const [thisDocumentId, setThisDocumentId] = useState(0);
   const editorRef = useRef(null);
-  const [displayEditor, setDisplayEditor] = useState(false);
+  const [displayEditor, setDisplayEditor] = useState(true);
   const [documentToDisplay, setDocumentToDisplay] = useState(
-    new Documents({
-      documentTitle: "",
-      documentText: "",
-      author: "",
-      date: "",
-      documentId: 0,
-    })
+    new Documents("", "", "", "", 0)
   );
 
   let params = useParams();
@@ -100,12 +95,24 @@ export function EditDocument() {
   //   );
   // });
 
+  // function renderParentComponentFromChild() {
+  //   setRerenderParentFromChild(!rerenderParentFromChild);
+
+  //   console.log("parent has rerendered");
+  // }
+
+  //DocumentToDisplay skickar ej data till dens barn via props om man uppdaterar sidan eftersom inte förälderkomponenten genereras. Vad göra åt detta?
+  //Skickar inte heller props när man går från dokumentlistan
+
   return (
     <>
       {displayEditor ? (
-        <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
+        <DisplayDocument
+          // reRenderParent={renderParentComponentFromChild}
+          documentInfo={documentToDisplay}
+        ></DisplayDocument>
       ) : (
-        <NotFound></NotFound>
+        <Wysiwyg documentInfo={documentToDisplay}></Wysiwyg>
       )}
       <button onClick={handleClick}>
         {displayEditor ? "Redigera dokument" : "Visa i läsläge"}

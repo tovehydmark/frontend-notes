@@ -36,9 +36,7 @@ export function ShowDocuments() {
           {/* <EditDocument documentinfo={document}></EditDocument>; */}
           {/* Lägg editDocument komponent här och skicka med dokumentet som props. I den komponenten gör vi sedan en put. Visa Editor komponenten där och skicka via props för att få ut rätt innehåll? */}
 
-          <Link to={`/editdocument/${document.documentId}`}>
-            Redigera dokument
-          </Link>
+          <Link to={`/editdocument/${document.documentId}`}>Visa dokument</Link>
 
           <div dangerouslySetInnerHTML={createMarkup(i)}></div>
           <hr />
