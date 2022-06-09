@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Link } from "react-router-dom";
-import { Documents } from "../models/Document";
 
 export function Wysiwyg(props) {
   const editorRef = useRef(null);
@@ -10,13 +9,32 @@ export function Wysiwyg(props) {
     console.log(props);
   });
 
-  const log = () => {
+  // Gets value from the text field and sends it with PUT to the database
+
+  const updateDocument = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
+
+      let updatedText = {
+        documentText: editorRef.current.getContent(),
+        documentId: props.documentInfo.documentId,
+      };
+      updateDocumentWithPut(updatedText);
     }
   };
 
-  //Gör put för att uppdatera!!
+  // Updates the document in the database
+  async function updateDocumentWithPut(updatedText) {
+    await fetch("http://localhost:3003/fetchDocuments", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedText),
+    }).then((data) => {
+      console.log(data);
+    });
+  }
 
   return (
     <>
@@ -48,21 +66,9 @@ export function Wysiwyg(props) {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           }}
         />
-        <button onClick={log}>Spara</button>
+        <button onClick={updateDocument}>Spara uppdatering</button>
       </form>
-      <button>Visa färdigt dokument</button>
       <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
     </>
   );
 }
-
-//Post new document to API
-//   async function addDocument(documentObject) {
-//     await fetch("http://localhost:3003/createDocument", {
-//       method: "post",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(documentObject),
-//     }).then((data) => console.log(data));
-//   }
