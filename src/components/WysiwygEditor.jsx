@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { Link } from "react-router-dom";
 import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
 
@@ -59,7 +58,7 @@ export function WysiwygEditor() {
       );
     }
     // Toggles displayReadingView to hide or show reading view
-    setDisplayReadingView(!displayReadingView);
+    setDisplayReadingView(true);
   }
 
   return (
@@ -91,17 +90,12 @@ export function WysiwygEditor() {
         }}
       />
       <button onClick={log}>Spara</button>
-
-      {displayReadingView ? (
-        <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
-      ) : (
-        ""
-      )}
       <button onClick={displayEditorMode}>
-        {displayReadingView ? "Dölj läsläge" : "Visa i läsläge"}
+        {displayReadingView ? "Visa uppdaterade ändringar" : "Visa i läsläge"}
       </button>
-
-      <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
+      <hr />
+      <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
+      <hr />
     </>
   );
 }
