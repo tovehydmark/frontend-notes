@@ -32,6 +32,7 @@ export function Wysiwyg(props) {
 
   return (
     <>
+      <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
       <form method="put">
         <h1>Titel: {props.documentInfo.documentTitle}</h1>
 
@@ -59,7 +60,6 @@ export function Wysiwyg(props) {
         />
         <button onClick={updateDocument}>Spara uppdatering</button>
       </form>
-      <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
     </>
   );
 }

@@ -9,7 +9,7 @@ import { Layout } from "./components/Layout";
 import { Login } from "./components/Login";
 import { NotFound } from "./components/NotFound";
 import { ShowDocuments } from "./components/ShowDocuments";
-import { WysiwygEditor } from "./components/WysiwygEditor";
+import { WysiwygEditor } from "./components/CreateNewDocument";
 import { Documents } from "./models/Document";
 
 function App() {
