@@ -13,28 +13,10 @@ export function Wysiwyg(props) {
   const log = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
-
-      //   let documentObject = {
-      //     documentTitle: documentTitle,
-      //     author: author,
-      //     documentText: editorRef.current.getContent(),
-      //   };
-
-      //   addDocument(documentObject);
-
-      //Skicka in props här
-      // beroende på om det är post eller put, ha olika saker inskickade i posten
     }
   };
 
-  //
-
-  //   function handleTitleChange(e) {
-  //     setDocumentTitle(e.target.value);
-  //   }
-  //   function handleAuthorChange(e) {
-  //     setAuthor(e.target.value);
-  //   }
+  //Gör put för att uppdatera!!
 
   return (
     <>
