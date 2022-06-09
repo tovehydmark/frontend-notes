@@ -2,21 +2,16 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Documents } from "../models/Document";
 import { EditDocument } from "./EditDocument";
+import { FetchData } from "./FetchData";
 
 export function ShowDocuments() {
   const [allDocuments, setAllDocuments] = useState<Documents[]>([]);
 
   useEffect(() => {
-    showDocuments();
+    FetchData("http://localhost:3003/fetchDocuments").then((data) => {
+      setAllDocuments(data);
+    });
   }, []);
-
-  async function showDocuments() {
-    await fetch("http://localhost:3003/fetchDocuments")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllDocuments(data);
-      });
-  }
 
   //Prints all documents
   let printDocuments = allDocuments.map((document, i) => {

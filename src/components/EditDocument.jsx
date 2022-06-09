@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
+import { FetchData } from "./FetchData";
 import { Wysiwyg } from "./Wysiwyg";
 
 export function EditDocument() {
@@ -18,22 +19,17 @@ export function EditDocument() {
   useEffect(() => {
     // Saves params id to a variable
     setThisDocumentId(params.id);
-    showDocuments();
+
+    // Gets all documents from the database
+    FetchData("http://localhost:3003/fetchDocuments").then((data) => {
+      setAllDocuments(data);
+    });
   }, []);
 
   // Gets document content after fetch is done to ensure allDocuments have the updated content after fetch
   useEffect(() => {
     getDocumentContent();
   }, [allDocuments]);
-
-  // Gets all documents from the database
-  async function showDocuments() {
-    await fetch("http://localhost:3003/fetchDocuments")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllDocuments(data);
-      });
-  }
 
   // Finds the document of interest by comparing the params id and the document id
   function getDocumentContent() {

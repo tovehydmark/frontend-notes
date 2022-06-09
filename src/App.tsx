@@ -26,12 +26,7 @@ function App() {
             <Route path="/editdocument/:id" element={<EditDocument />} />
             <Route
               path="/displaydocument/:id"
-              element={
-                <DisplayDocument
-                  documentInfo={documentInfo}
-                  // reRenderParent={function (): void {}}
-                />
-              }
+              element={<DisplayDocument documentInfo={documentInfo} />}
             />
             <Route path="*" element={<NotFound />} />
           </Route>

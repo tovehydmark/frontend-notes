@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Link } from "react-router-dom";
+import { FetchData } from "./FetchData";
 
 export function Wysiwyg(props) {
   const editorRef = useRef(null);
@@ -12,23 +13,18 @@ export function Wysiwyg(props) {
         documentText: editorRef.current.getContent(),
         documentId: props.documentInfo.documentId,
       };
-      updateDocumentWithPut(updatedText);
+
+      //Updates content in database
+      FetchData(
+        "http://localhost:3003/fetchDocuments",
+        "put",
+        updatedText
+      ).then((data) => {
+        console.log(data);
+      });
       alert("Ändringar sparade");
     }
   };
-
-  // Updates the document text in the database
-  async function updateDocumentWithPut(updatedText) {
-    await fetch("http://localhost:3003/fetchDocuments", {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedText),
-    }).then((data) => {
-      console.log(data);
-    });
-  }
 
   return (
     <>

@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
 import { useNavigate } from "react-router-dom";
+import { FetchData } from "./FetchData";
 
 export function WysiwygEditor() {
   const [documentTitle, setDocumentTitle] = useState("");
@@ -24,22 +25,17 @@ export function WysiwygEditor() {
         documentText: editorRef.current.getContent(),
       };
 
-      addDocument(documentObject);
+      //Post new document to API
+      FetchData(
+        "http://localhost:3003/createDocument",
+        "post",
+        documentObject
+      ).then((data) => console.log(data));
+
       alert("Nytt dokument skapat!");
       routeChange();
     }
   };
-
-  //Post new document to API
-  async function addDocument(documentObject) {
-    await fetch("http://localhost:3003/createDocument", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(documentObject),
-    }).then((data) => console.log(data));
-  }
 
   function handleTitleChange(e) {
     setDocumentTitle(e.target.value);
@@ -49,7 +45,7 @@ export function WysiwygEditor() {
   }
 
   function displayEditorMode() {
-    // Sends current data to reading view on click (does not update if user continues to type)
+    // Sends current data to reading view when user clicks the button
     if (editorRef.current) {
       setDocumentToDisplay(
         new Documents(
