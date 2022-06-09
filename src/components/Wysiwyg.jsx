@@ -16,7 +16,7 @@ export function Wysiwyg(props) {
 
       //Updates content in database
       FetchData(
-        "http://localhost:3003/fetchDocuments",
+        "http://localhost:3003/updateDocuments",
         "put",
         updatedText
       ).then((data) => {
