@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Documents } from "../models/Document";
 
+import "../styles/style.scss";
+
 interface IDisplayDocumentProps {
   documentInfo: Documents;
   // reRenderParent(): void;
@@ -34,10 +36,12 @@ export function DisplayDocument(props: IDisplayDocumentProps) {
 
   return (
     <>
-      <h1>{props.documentInfo.documentTitle}</h1>
-      <p>{props.documentInfo.author}</p>
-      <p>{props.documentInfo.date}</p>
-      <p>{props.documentInfo.documentText}</p>
+      <div className="readingview-div">
+        <h1>{props.documentInfo.documentTitle}</h1>
+        <p>{props.documentInfo.author}</p>
+        <p>{props.documentInfo.date}</p>
+        <p>{props.documentInfo.documentText}</p>
+      </div>
       {/* <p>{documentToDisplay.author}</p> */}
     </>
   );
