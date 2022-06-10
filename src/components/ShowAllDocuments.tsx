@@ -4,7 +4,7 @@ import { Documents } from "../models/Document";
 import { EditDocument } from "./EditDocument";
 import { FetchData } from "./FetchData";
 
-export function ShowDocuments() {
+export function ShowAllDocuments() {
   const [allDocuments, setAllDocuments] = useState<Documents[]>([]);
 
   useEffect(() => {

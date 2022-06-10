@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { FetchData } from "./FetchData";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const nav = useNavigate();
+
   useEffect(() => {}, []);
 
   //Compares user input with database data
   function loginUser() {
-    console.log("klick");
-
     let userObject = { userName: username, password: password };
 
     FetchData("http://localhost:3003/login", "POST", userObject).then(
       (data) => {
-        console.log(data);
-
         if (data.status == 200) {
           // Saves userId to localstorage to keep user loggedin
           localStorage.setItem("user", JSON.stringify(data.userId));
 
           //Redirects user to loggedin page
+          nav("/showDocuments");
+        } else {
+          alert("Fel användarnamn eller lösenord");
         }
       }
     );

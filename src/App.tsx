@@ -8,7 +8,7 @@ import { EditDocument } from "./components/EditDocument";
 import { Layout } from "./components/Layout";
 import { Login } from "./components/Login";
 import { NotFound } from "./components/NotFound";
-import { ShowDocuments } from "./components/ShowDocuments";
+import { ShowAllDocuments } from "./components/ShowAllDocuments";
 import { WysiwygEditor } from "./components/CreateNewDocument";
 import { Documents } from "./models/Document";
 
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Login />} />
-            <Route path="/showdocuments" element={<ShowDocuments />} />
+            <Route path="/showdocuments" element={<ShowAllDocuments />} />
             <Route path="/editor" element={<WysiwygEditor />} />
             <Route path="/editdocument/:id" element={<EditDocument />} />
             <Route
