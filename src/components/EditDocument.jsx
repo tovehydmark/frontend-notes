@@ -86,7 +86,9 @@ export function EditDocument() {
         <div>
           <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>{" "}
           <button onClick={showEditView}>Redigera dokument</button>
-          <button onClick={handleDelete}>Radera dokument</button>
+          <button className="deleteBtn" onClick={handleDelete}>
+            Radera dokument
+          </button>
         </div>
       ) : (
         <Wysiwyg documentInfo={documentToDisplay}></Wysiwyg>

@@ -77,39 +77,45 @@ export function CreateNewDocument() {
 
   return (
     <>
-      <h1>Titel: {documentTitle}</h1>
-      <input type="text" value={documentTitle} onChange={handleTitleChange} />
+      <div className="editorStyling">
+        <h1>Titel: {documentTitle}</h1>
+        <input type="text" value={documentTitle} onChange={handleTitleChange} />
 
-      <p>Författare: {author}</p>
-      <input type="text" value={author} onChange={handleAuthorChange} />
+        <p>Författare: {author}</p>
+        <input type="text" value={author} onChange={handleAuthorChange} />
 
-      <Editor
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>Skriv här...</p>"
-        init={{
-          height: 500,
-          menubar: false,
-          plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount",
-          ],
-          toolbar:
-            "undo redo | formatselect | " +
-            "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat",
-          content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-        }}
-      />
-      <button onClick={log}>Spara</button>
-      <button onClick={displayEditorMode}>
-        {displayReadingView ? "Visa uppdaterade ändringar" : "Visa i läsläge"}
-      </button>
-      <hr />
-      <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
-      <hr />
+        <Editor
+          onInit={(evt, editor) => (editorRef.current = editor)}
+          initialValue="<p>Skriv här...</p>"
+          init={{
+            height: 500,
+            menubar: false,
+            plugins: [
+              "advlist autolink lists link image charmap print preview anchor",
+              "searchreplace visualblocks code fullscreen",
+              "insertdatetime media table paste code help wordcount",
+            ],
+            toolbar:
+              "undo redo | formatselect | " +
+              "bold italic backcolor | alignleft aligncenter " +
+              "alignright alignjustify | bullist numlist outdent indent | " +
+              "removeformat",
+            content_style:
+              "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          }}
+        />
+        <button onClick={log}>Spara</button>
+        <button onClick={displayEditorMode}>
+          {displayReadingView ? "Visa uppdaterade ändringar" : "Visa i läsläge"}
+        </button>
+        <button onClick={routeChange}>Avbryt</button>
+
+        {displayReadingView ? (
+          <DisplayDocument documentInfo={documentToDisplay}></DisplayDocument>
+        ) : (
+          ""
+        )}
+      </div>
     </>
   );
 }

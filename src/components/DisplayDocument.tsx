@@ -12,12 +12,16 @@ export function DisplayDocument(props: IDisplayDocumentProps) {
 
   return (
     <>
+      <hr />
       <Link to={`/showalldocuments`}>Tillbaka till alla dokument</Link>
-      <div className="reading-view">
-        <h1>Rubrik: {props.documentInfo.documentTitle}</h1>
-        <p>Författare: {props.documentInfo.author}</p>
-        <p>Datum: {props.documentInfo.date}</p>
-        <hr />
+
+      <hr />
+      <div className="reading-mode">
+        <div className="centerAlignHeading">
+          <h1>Rubrik: {props.documentInfo.documentTitle}</h1>
+          <p>Författare: {props.documentInfo.author}</p>
+          <p>Datum: {props.documentInfo.date}</p>
+        </div>
         <div>{parse(props.documentInfo.documentText)}</div>
       </div>
     </>

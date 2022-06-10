@@ -30,12 +30,11 @@ export function ShowAllDocuments() {
 
     return (
       <>
-        <article key={document.documentId}>
+        <article key={document.documentId} className="documentInReadingView">
           <h1>{document.documentTitle}</h1>
           <p> Författare: {document.author}</p>
           <p>Datum: {newDateFormat}</p>
           <Link to={`/editdocument/${document.documentId}`}>Visa dokument</Link>
-          <hr />
         </article>
       </>
     );
@@ -50,9 +49,27 @@ export function ShowAllDocuments() {
 
   return (
     <>
-      {viewLogoutBtn ? <button onClick={logout}>Logga ut</button> : ""}
-      <Link to={`/createnewdocument`}>Skapa nytt dokument</Link>
-      {printDocuments}
+      <div className="welcome-message-position">
+        <div className="buttonAndLinkPositioning">
+          <h1>Välkommen!</h1>
+          <p>
+            Här är dina dokument. <br />
+            För att visa eller redigera ett dokument, klicka på 'visa dokument'
+            under respektive rubrik.
+            <br />
+            Skapa ett nytt dokument genom att klicka på 'skapa dokument' till
+            höger.
+          </p>
+        </div>
+        <div className="buttonAndLinkPositioning">
+          <button className="createNewDocLink">
+            <Link to={`/createnewdocument`}>Skapa dokument</Link>{" "}
+          </button>
+
+          {viewLogoutBtn ? <button onClick={logout}>Logga ut</button> : ""}
+        </div>
+      </div>
+      <div className="showAllDocumentsSection">{printDocuments}</div>
     </>
   );
 }

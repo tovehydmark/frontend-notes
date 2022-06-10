@@ -31,25 +31,27 @@ export function Login() {
 
   return (
     <>
-      <h1>Logga in i dokumenthanteraren</h1>
+      <div className="loginStyling">
+        <h1>Logga in i dokumenthanteraren</h1>
 
-      <label htmlFor="username">Användarnamn: </label>
-      <input
-        type="text"
-        name="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        <label htmlFor="username">Användarnamn: </label>
+        <input
+          type="text"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
 
-      <label htmlFor="password">Lösenord: </label>
-      <input
-        type="password"
-        name="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <label htmlFor="password">Lösenord: </label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <button onClick={loginUser}>Logga in </button>
+        <button onClick={loginUser}>Logga in </button>
+      </div>
     </>
   );
 }

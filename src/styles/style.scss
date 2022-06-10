@@ -1,29 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Joan&family=Roboto&display=swap");
+
+// Fonts and colors
+
+$heading-font: "Joan";
+$text-font: "Roboto";
+$darkblue: #2e2245;
+$lightred: #f24030;
+$yellow: #f7c217;
+$blue: #19a3b5;
+$beige: #f6d8a1;
+
+// Header
+
 .header {
-    background-color: rgb(175, 180, 177);
+    background-color: $blue;
     height: 80px;
 
     h2 {
         margin: 0;
         padding: 20px 0 0 10px;
-        color: rgb(246, 251, 246);
-
+        color: $yellow;
+        font-family: "Berkshire Swash";
     }
 }
+
+// Main
 
 .main {
     text-align: center;
     padding-bottom: 80px;
+    font-family: $text-font;
+    margin: 10px;
 
-    // .reading-view {}
+    // Login page
+    .loginStyling {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: 50px auto;
+
+        h1 {
+            margin-bottom: 40px
+        }
+
+        label {
+            margin: 0 auto;
+            width: 50%;
+
+        }
+
+        input {
+            margin: 10px auto;
+            width: 40%;
+            font-size: 1rem;
+
+        }
+
+        button {
+            margin: 30px auto;
+            width: 200px
+        }
+    }
+
+    //Links and buttons
+    .welcome-message-position {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        text-align: left;
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    .buttonAndLinkPositioning {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+
+        button {
+            margin-top: 5px;
+            width: 170px;
+        }
+
+        .createNewDocLink {
+            background-color: #188a56;
+            color: white;
+
+            a {
+                text-decoration: none;
+            }
+        }
+
+        a:visited {
+            color: white;
+        }
+    }
+
+    a {
+        color: black;
+        font-size: 1.2rem;
+    }
+
+    a:visited {
+        color: black;
+    }
+
+    button {
+        font-family: $text-font;
+        padding: 0.5rem;
+        background-color: #2e2245;
+        color: $yellow;
+        border-radius: 7px;
+        font-size: 1.2rem;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    .deleteBtn {
+        background-color: #f24030;
+        color: #2e2245;
+    }
+
+    //Headings
+
+    h1 {
+        font-family: $heading-font;
+    }
+
+    hr {
+        width: 40%;
+        border-top: 3px solid rgb(149, 149, 149);
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        border-style: dotted;
+        padding: 10px;
+    }
 
 
+    // Reading view styles
+
+    .documentInReadingView {
+        margin: 10px auto;
+        padding-bottom: 30px;
+        width: 40%;
+        border: 3px dotted $darkblue;
+    }
+
+    .showAllDocumentsSection {
+        padding-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+
+    }
+
+    .reading-mode {
+        width: 70%;
+        margin: 0 auto;
+        text-align: left;
+
+        .centerAlignHeading {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+    }
+
+
+    // wysiwyg - editor styling
+    .editorStyling {
+        margin: 0 auto;
+        width: 70%;
+    }
 }
 
+// Footer
 .footer {
-
-    height: 50px;
+    height: 60px;
     width: 100%;
-    background-color: lightgray;
+    background-color: #ffffff;
+    color: #2e2245;
+    text-align: right;
     position: fixed;
     bottom: 0;
+
+    hr {
+        color: $yellow;
+        margin: 0;
+    }
+
+    p {
+        padding-right: 10px;
+    }
 }
