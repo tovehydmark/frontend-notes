@@ -17,7 +17,13 @@ export function EditDocument() {
   let params = useParams();
   let navigate = useNavigate();
 
+  // If user is not loggedin when attempting to access route, user is redirected to login page
   useEffect(() => {
+    let userFromLocalStorage = localStorage.getItem("user");
+    if (!userFromLocalStorage) {
+      navigate("/");
+    }
+
     // Saves params id to a variable
     setThisDocumentId(params.id);
 
@@ -66,7 +72,7 @@ export function EditDocument() {
   }
 
   function routeChange() {
-    let path = `/showdocuments`;
+    let path = `/showalldocuments`;
     navigate(path);
   }
 

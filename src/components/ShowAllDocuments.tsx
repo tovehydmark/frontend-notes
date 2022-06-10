@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Documents } from "../models/Document";
-import { EditDocument } from "./EditDocument";
 import { FetchData } from "./FetchData";
 
 export function ShowAllDocuments() {
   const [allDocuments, setAllDocuments] = useState<Documents[]>([]);
+  const nav = useNavigate();
 
   useEffect(() => {
-    FetchData("http://localhost:3003/fetchDocuments").then((data) => {
-      setAllDocuments(data);
-    });
+    let userFromLocalStorage = localStorage.getItem("user");
+
+    // If user is not loggedin when attempting to access route, user is redirected to login page
+    if (!userFromLocalStorage) {
+      nav("/");
+    } else {
+      FetchData("http://localhost:3003/fetchDocuments").then((data) => {
+        setAllDocuments(data);
+      });
+    }
   }, []);
 
   //Prints all documents
@@ -30,7 +37,7 @@ export function ShowAllDocuments() {
 
   return (
     <>
-      <Link to={`/editor`}>Skapa nytt dokument</Link>
+      <Link to={`/createnewdocument`}>Skapa nytt dokument</Link>
       {printDocuments}
     </>
   );

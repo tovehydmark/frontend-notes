@@ -12,11 +12,11 @@ export function DisplayDocument(props: IDisplayDocumentProps) {
 
   return (
     <>
-      <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
+      <Link to={`/showalldocuments`}>Tillbaka till alla dokument</Link>
       <div className="reading-view">
-        <h1>{props.documentInfo.documentTitle}</h1>
-        <p>{props.documentInfo.author}</p>
-        <p>{props.documentInfo.date}</p>
+        <h1>Rubrik: {props.documentInfo.documentTitle}</h1>
+        <p>Författare: {props.documentInfo.author}</p>
+        <hr />
         <div>{parse(props.documentInfo.documentText)}</div>
       </div>
     </>

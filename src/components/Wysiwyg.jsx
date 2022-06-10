@@ -28,7 +28,7 @@ export function Wysiwyg(props) {
 
   return (
     <>
-      <Link to={`/showdocuments`}>Tillbaka till alla dokument</Link>
+      <Link to={`/showalldocuments`}>Tillbaka till alla dokument</Link>
       <form method="put">
         <h1>Titel: {props.documentInfo.documentTitle}</h1>
 

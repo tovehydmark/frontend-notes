@@ -21,7 +21,7 @@ export function Login() {
           localStorage.setItem("user", JSON.stringify(data.userId));
 
           //Redirects user to loggedin page
-          nav("/showDocuments");
+          nav("/showalldocuments");
         } else {
           alert("Fel användarnamn eller lösenord");
         }

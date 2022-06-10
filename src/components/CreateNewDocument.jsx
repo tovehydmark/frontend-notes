@@ -1,11 +1,11 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
 import { useNavigate } from "react-router-dom";
 import { FetchData } from "./FetchData";
 
-export function WysiwygEditor() {
+export function CreateNewDocument() {
   const [documentTitle, setDocumentTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [displayReadingView, setDisplayReadingView] = useState(false);
@@ -16,6 +16,15 @@ export function WysiwygEditor() {
   let navigate = useNavigate();
 
   const editorRef = useRef(null);
+
+  // If user is not loggedin when attempting to access route, user is redirected to login page
+  useEffect(() => {
+    let userFromLocalStorage = localStorage.getItem("user");
+    if (!userFromLocalStorage) {
+      navigate("/login");
+      return;
+    }
+  });
 
   const log = () => {
     if (editorRef.current) {
@@ -62,7 +71,7 @@ export function WysiwygEditor() {
   }
 
   function routeChange() {
-    let path = `/showdocuments`;
+    let path = `/showalldocuments`;
     navigate(path);
   }
 
