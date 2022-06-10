@@ -8,10 +8,7 @@ interface IDisplayDocumentProps {
 }
 
 export function DisplayDocument(props: IDisplayDocumentProps) {
-  // Using createMarkup as I'm setting inner HTML with "dangerouslySetInnerHTML" (recommendation by React documentation to use markup)
-  function createMarkup() {
-    return { __html: props.documentInfo.documentText };
-  }
+  const parse = require("html-react-parser");
 
   return (
     <>
@@ -20,7 +17,7 @@ export function DisplayDocument(props: IDisplayDocumentProps) {
         <h1>{props.documentInfo.documentTitle}</h1>
         <p>{props.documentInfo.author}</p>
         <p>{props.documentInfo.date}</p>
-        <div dangerouslySetInnerHTML={createMarkup()}></div>
+        <div>{parse(props.documentInfo.documentText)}</div>
       </div>
     </>
   );
