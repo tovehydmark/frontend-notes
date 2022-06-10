@@ -5,6 +5,7 @@ import { FetchData } from "./FetchData";
 
 export function ShowAllDocuments() {
   const [allDocuments, setAllDocuments] = useState<Documents[]>([]);
+  const [viewLogoutBtn, setViewLogoutBtn] = useState(false);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -16,6 +17,7 @@ export function ShowAllDocuments() {
     } else {
       FetchData("http://localhost:3003/fetchDocuments").then((data) => {
         setAllDocuments(data);
+        setViewLogoutBtn(true);
       });
     }
   }, []);
@@ -35,8 +37,16 @@ export function ShowAllDocuments() {
     );
   });
 
+  // Clear local storage at logout and redirect to login page
+  function logout() {
+    localStorage.clear();
+    alert("Du loggas ut");
+    nav("/");
+  }
+
   return (
     <>
+      {viewLogoutBtn ? <button onClick={logout}>Logga ut</button> : ""}
       <Link to={`/createnewdocument`}>Skapa nytt dokument</Link>
       {printDocuments}
     </>
