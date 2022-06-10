@@ -42,11 +42,15 @@ export function EditDocument() {
   function getDocumentContent() {
     allDocuments.find((doc) => {
       if (doc.documentId == thisDocumentId) {
+        // Formats the date to look good
+        let changeDateFormat = new Date(doc.date);
+        let newDateFormat = changeDateFormat.toLocaleDateString();
+
         setDocumentToDisplay({
           documentTitle: doc.documentTitle,
           documentText: doc.documentText,
           author: doc.author,
-          date: doc.date,
+          date: newDateFormat,
           documentId: doc.documentId,
         });
       }

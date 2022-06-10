@@ -22,14 +22,18 @@ export function ShowAllDocuments() {
     }
   }, []);
 
-  //Prints all documents
+  // Prints all documents
   let printDocuments = allDocuments.map((document, i) => {
+    // Formats the dates to look good
+    let changeDateFormat = new Date(document.date);
+    let newDateFormat = changeDateFormat.toLocaleDateString();
+
     return (
       <>
         <article key={document.documentId}>
           <h1>{document.documentTitle}</h1>
           <p> Författare: {document.author}</p>
-          <p>{document.date}</p>
+          <p>Datum: {newDateFormat}</p>
           <Link to={`/editdocument/${document.documentId}`}>Visa dokument</Link>
           <hr />
         </article>
