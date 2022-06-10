@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Documents } from "../models/Document";
 import { DisplayDocument } from "./DisplayDocument";
@@ -7,7 +7,6 @@ import { Wysiwyg } from "./Wysiwyg";
 import { useNavigate } from "react-router-dom";
 
 export function EditDocument() {
-  const [startValue, setStartValue] = useState("");
   const [allDocuments, setAllDocuments] = useState([]);
   const [thisDocumentId, setThisDocumentId] = useState(0);
   const [displayEditor, setDisplayEditor] = useState(true);
@@ -37,8 +36,6 @@ export function EditDocument() {
   function getDocumentContent() {
     allDocuments.find((doc) => {
       if (doc.documentId == thisDocumentId) {
-        setStartValue(doc.documentText);
-
         setDocumentToDisplay({
           documentTitle: doc.documentTitle,
           documentText: doc.documentText,
@@ -55,24 +52,16 @@ export function EditDocument() {
   }
 
   // Deletes document and relocates to document list
-
   async function handleDelete() {
-    // let id = parseInt(thisDocumentId);
+    let documentId = { thisDocumentId };
 
-    console.log(typeof thisDocumentId); //Detta är en string
+    FetchData(
+      "http://localhost:3003/deleteDocuments",
+      "DELETE",
+      documentId
+    ).then((data) => console.log(data));
 
-    await fetch("http://localhost:3003/deleteDocuments", {
-      method: "DELETE",
-      body: JSON.stringify(thisDocumentId),
-    }).then((res) => console.log(res));
-
-    // FetchData(
-    //   "http://localhost:3003/deleteDocuments",
-    //   "DELETE",
-    //   thisDocumentId
-    // ).then((data) => console.log(data));
-
-    // alert("Dokumentet raderat");
+    alert("Dokumentet raderat");
     routeChange();
   }
 
