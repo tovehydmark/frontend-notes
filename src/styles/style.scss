@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Joan&family=Roboto&display=swap");
 
 // Fonts and colors
-
 $heading-font: "Joan";
 $text-font: "Roboto";
 $darkblue: #2e2245;
@@ -11,7 +10,6 @@ $blue: #19a3b5;
 $beige: #f6d8a1;
 
 // Header
-
 .header {
     background-color: $blue;
     height: 80px;
@@ -25,7 +23,6 @@ $beige: #f6d8a1;
 }
 
 // Main
-
 .main {
     text-align: center;
     padding-bottom: 80px;
@@ -62,7 +59,7 @@ $beige: #f6d8a1;
         }
     }
 
-    //Links and buttons
+    //Welcome message
     .welcome-message-position {
         display: flex;
         width: 100%;
@@ -74,6 +71,7 @@ $beige: #f6d8a1;
         }
     }
 
+    //Links and buttons
     .buttonAndLinkPositioning {
         display: flex;
         flex-direction: column;
@@ -126,7 +124,6 @@ $beige: #f6d8a1;
     }
 
     //Headings
-
     h1 {
         font-family: $heading-font;
     }
@@ -143,7 +140,6 @@ $beige: #f6d8a1;
 
 
     // Reading view styles
-
     .documentInReadingView {
         margin: 10px auto;
         padding-bottom: 30px;

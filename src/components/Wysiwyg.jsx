@@ -1,16 +1,20 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Link } from "react-router-dom";
 import { FetchData } from "./FetchData";
 
 export function Wysiwyg(props) {
   const editorRef = useRef(null);
+  const [title, setTitle] = useState(props.documentInfo.documentTitle);
+  const [author, setAuthor] = useState(props.documentInfo.author);
 
   // Gets value from the text field and sends it with PUT to the database
   const updateDocument = () => {
     if (editorRef.current) {
       let updatedText = {
         documentText: editorRef.current.getContent(),
+        documentTitle: title,
+        author: author,
         documentId: props.documentInfo.documentId,
       };
 
@@ -26,14 +30,29 @@ export function Wysiwyg(props) {
     }
   };
 
+  // Updates title and author
+  function handleTitleChange(e) {
+    setTitle(e.target.value);
+  }
+
+  function handleAuthorChange(e) {
+    setAuthor(e.target.value);
+  }
+
   return (
     <>
       <div className="editorStyling">
         <Link to={`/showalldocuments`}>Tillbaka till alla dokument</Link>
         <form method="put">
-          <h1>Titel: {props.documentInfo.documentTitle}</h1>
+          <h1>Rubrik: {title}</h1>
 
-          <p>Författare: {props.documentInfo.author}</p>
+          <label htmlFor="title">Uppdatera rubrik: </label>
+          <input type="text" name="title" onChange={handleTitleChange} />
+
+          <p>Författare: {author}</p>
+
+          <label htmlFor="author">Uppdatera författare: </label>
+          <input type="text" name="author" onChange={handleAuthorChange} />
 
           <Editor
             onInit={(evt, editor) => (editorRef.current = editor)}
